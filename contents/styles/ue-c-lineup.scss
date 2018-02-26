@@ -1,7 +1,15 @@
 :root{
   --ue-c-lineup-field-height: 100%;
   --ue-c-lineup-field-width: 100%;
+
 }
+
+@mixin ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .ue-c-lineup {
   background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/45/Football_field.svg');
   background-repeat: no-repeat;
@@ -9,6 +17,7 @@
   height: 74vh;
   width: 49vh;
   margin: 1em auto;
+  font-family: "Roboto", Arial, sans-serif;
 }
 
 .ue-c-lineup__team {
@@ -16,24 +25,79 @@
   height: calc(var(--ue-c-lineup-field-height)/2);
   position: relative;
 }
+
 .ue-c-lineup__player {
   font-family: helvetica;
   color: whitesmoke;
   position: absolute;
   box-sizing: border-box;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  &-name {
+  &-wrapper {
+    border: 1px solid red;
+    position: relative;
+    display: block;
+    background: pink;
+    height: 30px;
+    width: 50px;
+
+    > * {
+      position: absolute;
+      font-size: 11px;
+    }
+
+    .is-up-left {
+      top: 0;
+      left: 0;
+    }
+    .is-up-right {
+      top: 0;
+      right: 0;
+    }
+    .is-down-left {
+      bottom: 0;
+      left: 0;
+    }
+    .is-down-right {
+      bottom: 0;
+      right: 0;
+    }
+    .is-centered {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 14px;
+    }
+  }
+
+  &-number {
     background-color: black;
     border-radius: 50%;
     display: inline-block;
-    width: 1.8em;
-    height: 1.8em;
+    width: 1.7em;
+    height: 1.7em;
     text-align: center;
-    line-height: 1.8em;
-    font-size: 0.95em;
+    line-height: 1.7em;
+    font-size: 0.85em;
+  }
+
+  &-name {
+    text-transform: uppercase;
+    width: 100%;
+    text-align: center;
+    font-size: 11px;
+    @include ellipsis;
+
+    span { 
+      padding: 0.25em 0.55em;
+      background-color: black;
+      color: whitesmoke;
+      display: inline-block; 
+      width: auto;
+    }
   }
 }
 
